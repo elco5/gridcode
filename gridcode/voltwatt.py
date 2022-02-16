@@ -10,22 +10,6 @@ class VoltWattTest:
         self.vl = eut.vn *  0.85
         self.av = eut.vn *  0.015
 
-        self.steps = [
-            self.vl + self.av,
-            self.v1 - self.av,
-            self.v1 + self.av,
-            (self.v1 + self.v2)/2,
-            self.v2 - self.av,
-            self.v2 + self.av,
-            self.vh - self.av,
-            self.v2 + self.av,
-            self.v2 - self.av,
-            (self.v1 + self.v2)/2,
-            self.v1 + self.av,
-            self.v1 - self.av,
-            self.vl + self.av,
-        ]
-
         if characteristic_type == 1:
             self.v1 = eut.vn * 1.06
             self.p1 = eut.prated
@@ -46,6 +30,22 @@ class VoltWattTest:
             self.v2 = eut.vn * 1.1
             self.p2_prime = -eut.prated
             self.ol_tr = 0.5
+
+        self.steps = [
+        self.vl + self.av,
+        self.v1 - self.av,
+        self.v1 + self.av,
+        (self.v1 + self.v2)/2,
+        self.v2 - self.av,
+        self.v2 + self.av,
+        self.vh - self.av,
+        self.v2 + self.av,
+        self.v2 - self.av,
+        (self.v1 + self.v2)/2,
+        self.v1 + self.av,
+        self.v1 - self.av,
+        self.vl + self.av
+        ]
 
     def vw_slope(self):
         dy = self.p2_prime - self.p1
