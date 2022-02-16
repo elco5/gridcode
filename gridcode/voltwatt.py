@@ -1,9 +1,30 @@
 
 class VoltWattTest:
+    
 
     def __init__(self, characteristic_type, eut):
         
         self.characteristic = characteristic_type
+
+        self.vh = eut.vn *  1.15
+        self.vl = eut.vn *  0.85
+        self.av = eut.vn *  0.015
+
+        self.steps = [
+            self.vl + self.av,
+            self.v1 - self.av,
+            self.v1 + self.av,
+            (self.v1 + self.v2)/2,
+            self.v2 - self.av,
+            self.v2 + self.av,
+            self.vh - self.av,
+            self.v2 + self.av,
+            self.v2 - self.av,
+            (self.v1 + self.v2)/2,
+            self.v1 + self.av,
+            self.v1 - self.av,
+            self.vl + self.av,
+        ]
 
         if characteristic_type == 1:
             self.v1 = eut.vn * 1.06
@@ -47,3 +68,17 @@ class VoltWattTest:
         # print(vw1.watts_from_volts(200))
         # print(vw1.watts_from_volts(vw1.v2))
 
+
+# Step AC to V_L + a_v
+# Step AC to V_1 - a_v
+# Step AC to V_1 + a_v
+# Step AC to (V_1+V_2)/2
+# Step AC to V_2 - a_v
+# Step AC to V_2 + a_v
+# Step AC to V_H - a_v
+# Step AC to V_2 + a_v
+# Step AC to V_2 - a_v
+# Step AC to (V_1+V_2)/2
+# Step AC to V_1 - a_v
+# Step AC to V_1 + a_v
+# Step AC to V_L + a_v
