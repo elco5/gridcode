@@ -2,8 +2,8 @@
 class VoltWattTest:
     
 
-    def __init__(self, characteristic_type, eut):
-        
+    def __init__(self, characteristic_type,  eut):
+        #todo: add percent_power
         self.characteristic = characteristic_type
 
         self.vh = eut.vn *  1.15
@@ -14,7 +14,7 @@ class VoltWattTest:
             self.v1 = eut.vn * 1.06
             self.p1 = eut.prated
             self.v2 = eut.vn * 1.1
-            self.p2_prime = -eut.prated
+            self.p2_prime = 0
             self.ol_tr = 10
 
         elif characteristic_type == 2:
