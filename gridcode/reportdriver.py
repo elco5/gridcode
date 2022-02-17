@@ -1,6 +1,9 @@
 import pandas as pd
 import numpy as np
 
+from voltwatt import VoltWattTest
+
+
 class ReportDriver:
     
     #class data
@@ -10,11 +13,11 @@ class ReportDriver:
     def __init__(self) -> None:
         self.table = pd.DataFrame()
 
-    def test_profile_to_csv(self,vw_test):pass
+    def test_profile_to_csv(self,vw_test: VoltWattTest):pass
     #input n voltWattTests
     #output table of test values 
 
-    def calc_ideal_power_data_frame(self,vw_test):
+    def calc_ideal_power_data_frame(self,vw_test: VoltWattTest):
         #input voltWattTest
         data_length = 100
 
@@ -33,12 +36,14 @@ class ReportDriver:
 
         return ideal_df
         
-    def test_steps_power_data_frame(self,vw_test):
-        P = np.zeros(len(vw_test.steps))
-        for count, voltage in enumerate(vw_test.steps):
-            P[count] = vw_test.watts_from_volts(vw_test.steps[count])
+    def calc_test_steps_power_data_frame(self, vw_test: VoltWattTest):
+        v_steps = np.ndarray(vw_test.steps, dtype=np.float32)
+        P = np.zeros(len(v_steps))
+        for count, voltage in enumerate(v_steps):
+            P[count] = vw_test.watts_from_volts(v_steps[count])
         
-        test_steps_df = {'volts': vw_test.steps.T , 'watts': P.T}
+        test_steps_df = pd.DataFrame(
+            {'volts': v_steps.T, 'watts': P.T})
         
         return test_steps_df
 
