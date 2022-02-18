@@ -1,4 +1,6 @@
 import pandas as pd
+pd.options.plotting.backend = "plotly"
+import plotly.graph_objs as go
 import numpy as np
 
 from voltwatt import VoltWattTest
@@ -37,7 +39,7 @@ class ReportDriver:
         return ideal_df
         
     def calc_test_steps_power_data_frame(self, vw_test: VoltWattTest):
-        v_steps = np.ndarray(vw_test.steps, dtype=np.float32)
+        v_steps = np.array(vw_test.steps, dtype=np.float32)
         P = np.zeros(len(v_steps))
         for count, voltage in enumerate(v_steps):
             P[count] = vw_test.watts_from_volts(v_steps[count])
@@ -47,5 +49,28 @@ class ReportDriver:
         
         return test_steps_df
 
-    def vw_plotter(self,VoltWattTest,):pass
+    def vw_ideal_plotter(self, 
+        df_ideal: pd.DataFrame, df_test_steps: pd.DataFrame):
+
+        fig = go.Figure()
+
+        # Add test steps to plot
+        fig.add_trace(
+            go.Scatter(
+                name='Test Steps',
+                mode='markers',
+                x=vw1.steps,
+                y=P,
+                marker=dict(
+                    symbol='square',
+                    color='LightSkyBlue',
+                    size=5,
+                    line=dict(
+                        color='MediumPurple',
+                        width=2
+                    )
+                ),
+                showlegend=True
+            )
+        )
 
