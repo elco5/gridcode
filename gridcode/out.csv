@@ -1,5 +1,6 @@
 ,vw.1,vw.2,vw.3
 characteristic,1,2,3
+eut,<powerwall.Powerwall object at 0x0000022DC5ECC760>,<powerwall.Powerwall object at 0x0000022DC5ECC760>,<powerwall.Powerwall object at 0x0000022DC5ECC760>
 vh,276.0,276.0,276.0
 vl,204.0,204.0,204.0
 av,3.5999999999999996,3.5999999999999996,3.5999999999999996
