@@ -1,16 +1,17 @@
-#import re
-#from tokenize import Name
+
 import numpy as np
-# import pandas as pd
-# import matplotlib.pyplot as plt
+import pandas as pd
+
 
 class Wavegen:
 
+    
     def __init__(self) -> None:
-        pass
+        self.n_points = 1024
+        self.decimal_places = 6    
 
-    def time_vector(self, n_points) -> np.ndarray:
-        T = np.linspace(0,1,n_points,endpoint=False)
+    def time_vector(self) -> np.ndarray:
+        T = np.linspace(0,1,self.n_points,endpoint=False)
         return T
     
     def shifted_sin_function(self,t,shift_deg) -> float:
@@ -23,27 +24,27 @@ class Wavegen:
         for count, t in enumerate(T):
             W[count] = self.shifted_sin_function(T[count],shift_deg)
         return W
+    
+    def batch_create_waveforms(self):
 
+        min_shift_deg = -90
+        max_shift_deg = 90
+        iterval_deg = 5
 
-# wg = Wavegen()
-# n_points = 24
-# shift_deg = -np.pi
-# T = wg.time_vector(n_points)
-# print(T)
-# W = wg.generate_wave(T,shift_deg) 
+        index = np.arange(self.n_points)
+        T = self.time_vector()
 
-# df = pd.DataFrame(np.round(W.T,4),np.round(T.T,4))
-# df.to_csv('wave.csv', header=False)
-# fig = df.plot()
-
-
-
-
-
-
+        for shift in range(min_shift_deg,max_shift_deg+1,iterval_deg):
+            W = self.generate_wave(T,shift)
+            df = pd.DataFrame(np.round(W.T,self.decimal_places),index.T)
+            file_name = './waveforms/' + str(shift) + '.abw'
+            df.to_csv(file_name, header=False)
 
 
 
-wg = Wavegen()
-T = wg.time_vector(12)
-print(T)
+#     def run_app(self):
+#         print("app has run")
+        
+# if __name__ == "__main__":
+#     with Wavegen() as app:
+#         app.run_app()
