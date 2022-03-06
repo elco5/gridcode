@@ -11,3 +11,7 @@ class Powerwall:
         self.prated = 5000
         self.pmax = 5000
 
+        self.qmax = 63000
+        self.qrated = 63000
+        self.qmin = -63000
+

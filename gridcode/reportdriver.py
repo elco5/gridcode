@@ -50,7 +50,7 @@ class ReportDriver:
         return test_steps_df
 
     def vw_ideal_plotter(self, 
-        df_ideal: pd.DataFrame, df_test_steps: pd.DataFrame):
+        df_ideal: pd.DataFrame, test_steps_df: pd.DataFrame):
 
         fig = go.Figure()
 
@@ -59,8 +59,8 @@ class ReportDriver:
             go.Scatter(
                 name='Test Steps',
                 mode='markers',
-                x=vw1.steps,
-                y=P,
+                x=test_steps_df["volts"],
+                y=test_steps_df["watts"],
                 marker=dict(
                     symbol='square',
                     color='LightSkyBlue',
